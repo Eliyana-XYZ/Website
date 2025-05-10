@@ -1,58 +1,47 @@
-// Load the chat widget after the page is ready
-$w.onReady(function () {
-  // Inject required stylesheets
-  const fontLink = document.createElement('link');
-  fontLink.href = 'https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap';
-  fontLink.rel = 'stylesheet';
-  document.head.appendChild(fontLink);
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
 
-  const chatStyle = document.createElement('link');
-  chatStyle.href = 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css';
-  chatStyle.rel = 'stylesheet';
-  document.head.appendChild(chatStyle);
 
-  // Load the UMD version of the chat widget
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.umd.js';
-  script.onload = () => {
-    const createChat = window.n8nChat.createChat;
+                        <!-- Load n8n Chat -->
 
-    createChat({
-      webhookUrl: 'https://riverai67.app.n8n.cloud/webhook/24c8c7f0-c6b6-437a-8102-7ff7cd9b5e96/chat',
-      mode: 'window',
-      showWelcomeScreen: false,
-      i18n: {
-        en: {
-          title: 'Chat with Us!',
-          subtitle: "We're here to help.",
-          inputPlaceholder: 'Type a message...'
-        }
-      }
-    }).then(widget => {
-      // Create a floating launcher button
-      const button = document.createElement('div');
-      button.innerText = '💬';
-      button.id = 'n8n-chat-launcher';
-      button.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 10000;
-        background-color: #007bff;
-        color: white;
-        padding: 12px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 24px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      `;
-      document.body.appendChild(button);
+                        <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
-      // Open the chat widget on click
-      button.addEventListener('click', () => {
-        widget.open();
-      });
-    });
-  };
-  document.body.appendChild(script);
-});
+                        <script type="module">
+
+                          import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+
+                          createChat({
+
+                            webhookUrl: 'https://riverai67.app.n8n.cloud/webhook/24c8c7f0-c6b6-437a-8102-7ff7cd9b5e96/chat',
+
+                            mode: 'window',
+
+                            showWelcomeScreen: false,
+
+                            i18n: {
+
+                              en: {
+
+                                title: 'Chat with Us!',
+
+                                subtitle: 'We\'re here to help.',
+
+                                inputPlaceholder: 'Type a message...'
+
+                              }
+
+                            }
+
+                          }).then(widget => {
+
+                            // Make sure the pink button opens the chat
+
+                            document.getElementById('n8n-chat-launcher').addEventListener('click', () => {
+
+                              widget.open();
+
+                            });
+
+                          });
+
+                        </script>
